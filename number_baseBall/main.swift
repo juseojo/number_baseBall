@@ -9,20 +9,28 @@ import Foundation
 
 func main() {
 	var isEndProgram: Bool = false
+	var gameHistory: [Int] = []
 
 	while isEndProgram == false {
 		print("환영합니다! 원하시는 번호를 입력해주세요")
 		print("1. 게임 시작하기  2. 게임 기록 보기  3. 종료하기")
 		guard let inputChoiceString = readLine() else {
-			print("올바르지 않은 입력값입니다")
+			print("올바른 숫자를 입력해주세요!")
 			continue
 		}
 
 		switch inputChoiceString {
 		case "1":
-			startGame()
+			startGame(gameHistory: &gameHistory)
 		case "2":
 			print("< 게임 기록 보기 >")
+			if gameHistory.isEmpty {
+				print("기록이 없습니다")
+			} else {
+				for i in 0..<gameHistory.count {
+					print("\(i + 1)번째 게임 : 시도 횟수 - \(gameHistory[i])")
+				}
+			}
 		case "3":
 			isEndProgram = true
 		default:
@@ -32,16 +40,17 @@ func main() {
 	}
 }
 
-func startGame() {
+func startGame(gameHistory: inout [Int]) {
 	var isEndGame: Bool = false
-	var answerNum = {
+	let answerNum = {
 		var result = Int.random(in: 1...9) * 100 + Int.random(in: 0...9) * 10 + Int.random(in: 0...9)
 		while checkNumber(tryNum: result, tryString: String(result)) == false {
 			result = Int.random(in: 1...9) * 100 + Int.random(in: 0...9) * 10 + Int.random(in: 0...9)
 		}
 		return result
 	}()
-	var answerString = String(answerNum)
+	let answerString = String(answerNum)
+	var tryCount = 0
 
 	print("<게임을 시작합니다.>")
 	while isEndGame == false {
@@ -50,14 +59,15 @@ func startGame() {
 			print("올바르지 않은 입력값입니다")
 			continue
 		}
-
 		guard checkNumber(tryNum: inputNumber, tryString: inputNumberString) else {
 			print("올바르지 않은 입력값입니다")
 			continue
 		}
 
+		tryCount += 1
 		if checkAnswer(answerString: answerString, tryString: inputNumberString) {
 			isEndGame = true
+			gameHistory.append(tryCount)
 		}
 	}
 }
