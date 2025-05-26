@@ -7,35 +7,60 @@
 
 import Foundation
 
-print("<게임을 시작합니다.")
+func main() {
+	var isEndProgram: Bool = false
 
-var isEndGame: Bool = false
-var answerNum = {
-	var result = Int.random(in: 1...9) * 100 + Int.random(in: 0...9) * 10 + Int.random(in: 0...9)
-	while checkNumber(tryNum: result, tryString: String(result)) == false {
-		result = Int.random(in: 1...9) * 100 + Int.random(in: 0...9) * 10 + Int.random(in: 0...9)
-	}
-	return result
-}()
-var answerString = String(answerNum)
+	while isEndProgram == false {
+		print("환영합니다! 원하시는 번호를 입력해주세요")
+		print("1. 게임 시작하기  2. 게임 기록 보기  3. 종료하기")
+		guard let inputChoiceString = readLine() else {
+			print("올바르지 않은 입력값입니다")
+			continue
+		}
 
-while isEndGame == false {
-	print("숫자를 입력하세요")
-	guard let inputNumberString = readLine(), let inputNumber = Int(inputNumberString) else {
-		print("올바르지 않은 입력값입니다")
-		continue
-	}
-	
-	guard checkNumber(tryNum: inputNumber, tryString: inputNumberString) else {
-		print("올바르지 않은 입력값입니다")
-		continue
-	}
-
-	if checkAnswer(answerString: answerString, tryString: inputNumberString) {
-		isEndGame = true
+		switch inputChoiceString {
+		case "1":
+			startGame()
+		case "2":
+			print("< 게임 기록 보기 >")
+		case "3":
+			isEndProgram = true
+		default:
+			print("올바르지 않은 입력값입니다")
+			continue
+		}
 	}
 }
 
+func startGame() {
+	var isEndGame: Bool = false
+	var answerNum = {
+		var result = Int.random(in: 1...9) * 100 + Int.random(in: 0...9) * 10 + Int.random(in: 0...9)
+		while checkNumber(tryNum: result, tryString: String(result)) == false {
+			result = Int.random(in: 1...9) * 100 + Int.random(in: 0...9) * 10 + Int.random(in: 0...9)
+		}
+		return result
+	}()
+	var answerString = String(answerNum)
+
+	print("<게임을 시작합니다.>")
+	while isEndGame == false {
+		print("숫자를 입력하세요")
+		guard let inputNumberString = readLine(), let inputNumber = Int(inputNumberString) else {
+			print("올바르지 않은 입력값입니다")
+			continue
+		}
+
+		guard checkNumber(tryNum: inputNumber, tryString: inputNumberString) else {
+			print("올바르지 않은 입력값입니다")
+			continue
+		}
+
+		if checkAnswer(answerString: answerString, tryString: inputNumberString) {
+			isEndGame = true
+		}
+	}
+}
 func checkNumber(tryNum: Int, tryString: String) -> Bool{
 	// 자리수 확인
 	if tryNum > 999  || tryNum < 100{
@@ -98,3 +123,5 @@ extension String {
 		return self[self.index(self.startIndex, offsetBy: index)]
 	}
 }
+
+main()
