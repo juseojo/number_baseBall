@@ -10,7 +10,13 @@ import Foundation
 print("<게임을 시작합니다.")
 
 var isEndGame: Bool = false
-var answerNum = Int.random(in: 1...9) * 100 + Int.random(in: 1...9) * 10 + Int.random(in: 1...9)
+var answerNum = {
+	var result = Int.random(in: 1...9) * 100 + Int.random(in: 0...9) * 10 + Int.random(in: 0...9)
+	while checkNumber(tryNum: result, tryString: String(result)) == false {
+		result = Int.random(in: 1...9) * 100 + Int.random(in: 0...9) * 10 + Int.random(in: 0...9)
+	}
+	return result
+}()
 var answerString = String(answerNum)
 
 while isEndGame == false {
@@ -20,7 +26,7 @@ while isEndGame == false {
 		continue
 	}
 	
-	guard checkQuestion(tryNum: inputNumber, tryString: inputNumberString) else {
+	guard checkNumber(tryNum: inputNumber, tryString: inputNumberString) else {
 		print("올바르지 않은 입력값입니다")
 		continue
 	}
@@ -30,7 +36,7 @@ while isEndGame == false {
 	}
 }
 
-func checkQuestion(tryNum: Int, tryString: String) -> Bool{
+func checkNumber(tryNum: Int, tryString: String) -> Bool{
 	// 자리수 확인
 	if tryNum > 999  || tryNum < 100{
 		return false
@@ -49,13 +55,6 @@ func checkQuestion(tryNum: Int, tryString: String) -> Bool{
 			return false
 		} else {
 			count = 0
-		}
-	}
-
-	// 0 사용 확인
-	for c in tryString {
-		if c == "0" as Character {
-			return false
 		}
 	}
 
