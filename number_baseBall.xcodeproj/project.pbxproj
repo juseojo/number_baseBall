@@ -22,9 +22,22 @@
 		E9EFEFA42DE4037D00D40120 /* number_baseBall */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = number_baseBall; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		E9EFEFD42DE44CFA00D40120 /* Exceptions for "number_baseBall" folder in "number_baseBall" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"String+.swift",
+			);
+			target = E9EFEFA32DE4037D00D40120 /* number_baseBall */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		E9EFEFA62DE4037D00D40120 /* number_baseBall */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				E9EFEFD42DE44CFA00D40120 /* Exceptions for "number_baseBall" folder in "number_baseBall" target */,
+			);
 			path = number_baseBall;
 			sourceTree = "<group>";
 		};
