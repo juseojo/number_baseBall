@@ -7,8 +7,12 @@
 
 class GameObject {
 	var gameHistory: [Int] = []
-	let numberBaseBallGame = NumberBaseBallGame()
+	let numberBaseBallGame: GameProtocol
 
+	init(numberBaseBallGame: GameProtocol) {
+		self.numberBaseBallGame = numberBaseBallGame
+	}
+	
 	func run() {
 		var isEndProgram = false
 

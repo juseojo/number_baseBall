@@ -7,6 +7,7 @@
 
 import Foundation
 
-let game = GameObject()
+let numberBaseBallGame = NumberBaseBallGame()
+let game = GameObject(numberBaseBallGame: numberBaseBallGame)
 
 game.run()

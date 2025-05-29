@@ -5,7 +5,7 @@
 //  Created by seongjun cho on 5/26/25.
 //
 
-class NumberBaseBallGame {
+class NumberBaseBallGame: GameProtocol {
 
 	func start() -> Int {
 		print("<게임을 시작합니다.>")
